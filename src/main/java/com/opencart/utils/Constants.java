@@ -7,4 +7,5 @@ public class Constants {
     public static String URL =  "https://opencart.abstracta.us/";
     public static String FILE_PATH_EXCEL = "src/main/resources/data.xlsx";
     public static int RANDOM_INT = ThreadLocalRandom.current().nextInt();
+    public static String OUTPUT_FILE_PATH_EXCEL = "src/main/resources/output.xlsx";
 }

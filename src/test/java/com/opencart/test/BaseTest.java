@@ -1,5 +1,7 @@
 package com.opencart.test;
 
+import com.opencart.pages.BasePage;
+import com.opencart.utils.Constants;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +31,11 @@ public class BaseTest {
         if(driver != null) {
             driver.quit();
         }
+    }
+
+    public void openUrl() {
+        BasePage basePage = new BasePage(driver);
+        basePage.navigateTo(Constants.URL);
 
     }
 }

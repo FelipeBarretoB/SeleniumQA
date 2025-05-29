@@ -18,8 +18,17 @@ public class ProductsPage extends BasePage{
         return By.xpath("//a[contains(text(),'"+product+"')]");
     }
 
+    private By addProductButton(){
+        return By.xpath("//div[@id='product']//button[@id='button-cart']");
+    }
+
     public void selectProduct(String product){
         wait.until(ExpectedConditions.visibilityOfElementLocated(product(product)));
         driver.findElement(product(product)).click();
+    }
+
+    public void addProductToCart() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addProductButton()));
+        driver.findElement(addProductButton()).click();
     }
 }

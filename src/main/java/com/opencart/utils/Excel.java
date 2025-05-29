@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,15 @@ import java.util.List;
 public class Excel {
     private  String filePath;
 
+    private String outputPath;
+
     public Excel(String filePath) {
         this.filePath = filePath;
+        this.outputPath = "";
+    }
+
+    public void setOutputPath(String outputPath){
+        this.outputPath = outputPath;
     }
 
     public List<String[]> readData(int SheetIndex) {
@@ -37,5 +45,23 @@ public class Excel {
             e.printStackTrace();
         }
         return data;
+    }
+
+    public void writeData(List<String[]> data, String log) {
+        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
+            XSSFSheet sheet = workbook.createSheet(log);
+            for (int i = 0; i < data.size(); i++) {
+                String[] rowData = data.get(i);
+                org.apache.poi.ss.usermodel.Row row = sheet.createRow(i);
+                for (int j = 0; j < rowData.length; j++) {
+                    row.createCell(j).setCellValue(rowData[j]);
+                }
+            }
+            try (java.io.FileOutputStream fos = new java.io.FileOutputStream(outputPath)) {
+                workbook.write(fos);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

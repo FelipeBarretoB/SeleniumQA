@@ -34,9 +34,22 @@ public class HomePage extends BasePage{
         return By.xpath("//div[@id=\"top-links\"]//a[normalize-space(text())=\"Logout\"]");
     }
 
+    private By loginButton() {
+        return By.xpath("//div[@id=\"top-links\"]//a[normalize-space(text())=\"Login\"]");
+    }
+
+    private By cartButton() {
+        return By.xpath("//div[@id=\"top-links\"]//a[@title=\"Shopping Cart\"]");
+    }
+    //div[@id="top-links"]//a[@title='Shopping Cart']
     public void clickRegisterButton() {
         driver.findElement(userIcon()).click();
         driver.findElement(registerButton()).click();
+    }
+
+    public void clickLogInButton() {
+        driver.findElement(userIcon()).click();
+        driver.findElement(loginButton()).click();
     }
 
     public void clickLogoutButton() {
@@ -55,5 +68,9 @@ public class HomePage extends BasePage{
                 .ignoring(NoSuchFieldError.class);
         WebElement subCat = waitf.until(driver -> driver.findElement(subCategory(subCategory)));
         subCat.click();
+    }
+
+    public void clickCart(){
+        driver.findElement(cartButton()).click();
     }
 }
