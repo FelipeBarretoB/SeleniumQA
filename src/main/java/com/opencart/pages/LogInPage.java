@@ -18,10 +18,18 @@ public class LogInPage extends BasePage{
         return By.xpath("//div[@class='well']//input[@value='Login']");
     }
 
+    private By getAlertMessage() {
+        return By.xpath("//div[@class='alert alert-danger alert-dismissible']");
+    }
+
     public void logIn(String email, String password) {
         driver.findElement(getInputs("email")).sendKeys(email);
         driver.findElement(getInputs("password")).sendKeys(password);
         driver.findElement(getLoginButton()).click();
+    }
+
+    public String getAlertMessageText() {
+        return driver.findElement(getAlertMessage()).getText();
     }
 
 

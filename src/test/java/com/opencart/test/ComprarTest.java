@@ -155,7 +155,6 @@ public class ComprarTest extends BaseTest{
                     itemStatus = new String[]{product, "In Cart"};
                     data2.add(itemStatus);
                 } catch (org.openqa.selenium.NoSuchElementException e) {
-                    System.out.println("alo?????");
                     itemStatus = new String[]{product, "Not In Cart"};
                     data2.add(itemStatus);
                     Assertions.fail("The product is not in the cart: " + e.getMessage());
@@ -164,8 +163,8 @@ public class ComprarTest extends BaseTest{
             });
         });
 
-        // Write to Excel before assertions are thrown
+
         excel.writeData(data2, "Comprar test excel fail");
-        //Verify.verifyAll();
+
     }
 }

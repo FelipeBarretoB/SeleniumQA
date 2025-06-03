@@ -94,4 +94,23 @@ public class CuentaTest extends BaseTest {
             homePage.clickLogoutButton();
         });
     }
+
+    @Test
+    @Order(5)
+    public void ingresarSesionConExcelFail() {
+        openUrl();
+        Excel excel = new Excel(Constants.FILE_PATH_EXCEL);
+        List<String[]> data = excel.readData(1);
+        HomePage homePage = new HomePage(driver);
+        LogInPage logInPage= new LogInPage(driver);
+        LoggedInPage loggedInPage = new LoggedInPage(driver);
+        data.forEach(dataprod -> {
+            homePage.clickLogInButton();
+            logInPage.logIn(dataprod[2]+ randomInt, dataprod[4]+"error"); //creado un error en la contraseña para verificar el mensaje de error
+            Assertions.assertEquals("Warning: No match for E-Mail Address and/or Password.", logInPage.getAlertMessageText(), "The page title is not as expected");
+            homePage.clickLogInButton();
+            logInPage.logIn(dataprod[2]+ randomInt+ "error", dataprod[4]); //creado un error en la email para verificar el mensaje de error
+            Assertions.assertEquals("Warning: No match for E-Mail Address and/or Password.", logInPage.getAlertMessageText(), "The page title is not as expected");
+        });
+    }
 }
